@@ -59,7 +59,7 @@ pipeline {
             steps {
                 echo 'Starting Ansible deployment...'
 
-                bat 'ansible-playbook deploy.yml'
+                bat 'wsl -d Ubuntu ansible-playbook /mnt/c/ProgramData/Jenkins/.jenkins/workspace/jenkins-html-demo/deploy.yml'
 
                 echo 'Ansible deployment completed.'
             }
