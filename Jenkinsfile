@@ -1,6 +1,14 @@
 pipeline {
     agent any
 
+    parameters {
+        string(
+            name: 'NAME',
+            defaultValue: 'Surendra Reddy',
+            description: 'Enter the name'
+        )
+    }
+
     tools {
         jdk 'JDK-21'
         maven 'Maven-3.9.16'
@@ -25,8 +33,29 @@ pipeline {
 
         stage('HTML') {
             steps {
-                echo 'HTML processing will happen here'
+                echo "Creating HTML for ${params.NAME}"
+
+                bat """
+                (
+                    echo ^<!DOCTYPE html^>
+                    echo ^<html^>
+                    echo ^<head^>
+                    echo ^<title^>Jenkins HTML Page^</title^>
+                    echo ^</head^>
+                    echo ^<body^>
+                    echo ^<h1^>Hello ${params.NAME}^!^</h1^>
+                    echo ^<p^>This HTML file was created by Jenkins.^</p^>
+                    echo ^</body^>
+                    echo ^</html^>
+                ) > output.html
+                """
             }
+        }
+    }
+
+    post {
+        success {
+            archiveArtifacts artifacts: 'output.html', fingerprint: true
         }
     }
 }
