@@ -55,7 +55,7 @@ pipeline {
             }
         }
 
-        stage('Ansible') {
+        /* stage('Ansible') {
             steps {
                 echo 'Starting Ansible deployment...'
 
@@ -63,7 +63,7 @@ pipeline {
 
                 echo 'Ansible deployment completed.'
             }
-        }
+        } */
     }
 
     post {
