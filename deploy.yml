@@ -1,0 +1,26 @@
+---
+- name: Jenkins Ansible Demo
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+
+    - name: Display message
+      debug:
+        msg: "Hello from Ansible running through Jenkins"
+
+    - name: Create deployment directory
+      file:
+        path: /tmp/jenkins-demo
+        state: directory
+        mode: '0755'
+
+    - name: Create deployment file
+      copy:
+        content: "Application deployed by Jenkins and Ansible\n"
+        dest: /tmp/jenkins-demo/deployment.txt
+
+    - name: Verify deployment
+      debug:
+        msg: "Deployment completed successfully"
